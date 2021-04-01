@@ -8,16 +8,16 @@ app = Flask(__name__)
 
 def cities_import() -> List[Dict]:
     config = {
-        'user': 'root',
-        'password': 'root',
-        'host': 'db',
+        'user': 'xuvwzq6wygw6t2gv',
+        'password': 'znabbsq170mffx5r',
+        'host': 'pxukqohrckdfo4ty.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
         'port': '3306',
-        'database': 'citiesData'
+        'database': 'hprxc6b8d6lbq5gf'
     }
     connection = mysql.connector.connect(**config)
     cursor = connection.cursor(dictionary=True)
 
-    cursor.execute('SELECT * FROM tblCitiesImport')
+    cursor.execute('SELECT * FROM random_people')
     result = cursor.fetchall()
 
     cursor.close()
@@ -26,7 +26,7 @@ def cities_import() -> List[Dict]:
     return result
 
 
-@app.route('/')
+@app.route('/table')
 def index() -> str:
     js = json.dumps(cities_import())
     resp = Response(js, status=200, mimetype='application/json')
