@@ -1,7 +1,7 @@
 from typing import List, Dict
 import mysql.connector
 import simplejson as json
-from flask import Flask, Response, render_template
+from flask import Flask, request, Response, render_template, redirect
 
 app = Flask(__name__)
 
@@ -35,6 +35,10 @@ def table() -> str:
     js = json.dumps(random_people())
     resp = Response(js, status=200, mimetype='application/json')
     return resp
+
+@app.route('/form')
+def form():
+    return render_template('newPerson.html', title='New Person')
 
 
 if __name__ == '__main__':
