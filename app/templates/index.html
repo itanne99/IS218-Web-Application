@@ -24,6 +24,7 @@
                     <td>{{ people.street_address }}</td>
                     <td>{{ people.city }}</td>
                     <td>{{ people.state }}</td>
+                    <td><a class="btn btn-primary" href="/editForm/{{ people.id }}" role="button">Edit</a></td>
                 </tr>
             {% endfor %}
             </tbody>
