@@ -55,6 +55,18 @@ def table() -> str:
 def form():
     return render_template('newPerson.html', title='New Person')
 
+@app.route('/newPerson', methods=['POST'])
+def new_person():
+    inputData = (request.form.get('first_name'), request.form.get('last_name'), request.form.get('email'),
+                 request.form.get('phone'), request.form.get('street_address'), request.form.get('city'),
+                 request.form.get('state'))
+    connection = mysql.connector.connect(**dbconfig)
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("INSERT INTO random_people (first_name, last_name, email, phone, street_address, city, state) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" % inputData)
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return redirect("/", code=302)
 
 @app.route('/editForm/<int:id>', methods=['GET'])
 def editform(id):
