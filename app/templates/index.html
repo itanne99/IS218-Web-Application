@@ -25,6 +25,7 @@
                     <td>{{ people.city }}</td>
                     <td>{{ people.state }}</td>
                     <td><a class="btn btn-primary" href="/editForm/{{ people.id }}" role="button">Edit</a></td>
+                    <td><a class="btn btn-danger" href="/deleteRecord/{{ people.id }}" role="button">Delete</a></td>
                 </tr>
             {% endfor %}
             </tbody>
