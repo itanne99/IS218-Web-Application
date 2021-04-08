@@ -94,5 +94,18 @@ def edit_person(id):
     return redirect("/", code=302)
 
 
+@app.route('/deleteRecord/<int:id>')
+def delete_record(id):
+    connection = mysql.connector.connect(**dbconfig)
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("DELETE FROM random_people WHERE id=%s" % id)
+    cursor.execute("SET @count = 0")
+    cursor.execute("UPDATE random_people SET random_people.id = @count:= @count + 1")
+    cursor.execute("ALTER TABLE random_people AUTO_INCREMENT = 1")
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return redirect("/", code=302)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
